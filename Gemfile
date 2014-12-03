@@ -1,4 +1,4 @@
-source 'https://code.stripe.com'
+
 source 'https://rubygems.org'
 ruby "2.1.5"
 
@@ -44,7 +44,8 @@ gem 'spring',        group: :development
 gem 'bootstrap-sass', '~> 3.3.1'
 gem "paperclip", "~> 4.2"
 gem "devise"
-gem 'stripe'
+gem "figaro"
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 
 group :production do
