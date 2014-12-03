@@ -10,10 +10,11 @@
     	<h3>  <%= @listing.name %></h3>
     	<p>  <%= number_to_currency(@listing.price) %></p>
     	<p>  <%= @listing.description %></p>
-    <br>
-    <div class="center">
-      <%= link_to "Buy It Now", new_listing_order_path(@listing), class: "btn btn-primary", data: { no_turbolink: true } %>
-    </div>
+        <br>
+        <div class="center">
+          <%= link_to "Buy It Now", new_listing_order_path(@listing), class: "btn btn-primary", data: { no_turbolink: true } %>
+        </div>
+        
 
 	</div>
 </div>
@@ -22,5 +23,7 @@
 <% if current_user == @listing.user %>
 
 	<%= link_to 'Edit', edit_listing_path(@listing), class: "btn btn-link" %> 
+<% else %>
+    <%= link_to "Write Review", new_listing_review_path(@listing), class: "btn btn-primary" %>
 <% end %>
-<%= link_to 'Back', listings_path, class: "btn btn-link" %>
+<%= link_to 'Back', listing_path, class: "btn btn-link" %>
