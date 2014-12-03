@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   
 
-  resources :reviews
+  
 
   devise_for :users
   resources :listings do
     resources :orders, only: [:new, :create]
+    resources :reviews, except: [:show, :index]
   end
   get 'pages/about'
 
