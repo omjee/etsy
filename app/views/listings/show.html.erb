@@ -1,3 +1,10 @@
+<h2>
+  <%= @listing.name %>
+</h2>
+
+<div class="star-rating" data-score= <%= @avg_rating %> ></div> 
+<p><%= "#{@reviews.length} reviews" %></p>
+
 <div class="row">
 	<div class="col-md-6">
 		<div class="thumbnail">
@@ -17,6 +24,24 @@
         
 
 	</div>
+    <div class="col-md-12">
+        <% if @reviews.blank? %>
+          <h3>No reviews yet. Be the first to write one!</h3>
+        <% else %>
+          <table class="table">
+            <tbody>
+              <% @reviews.each do |review| %>
+                <tr>
+                  <td>
+                    <div class="star-rating" data-score= <%= review.rating %> ></div>
+                    <p><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %></p>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+    </div>
 </div>
 
 
@@ -26,4 +51,16 @@
 <% else %>
     <%= link_to "Write Review", new_listing_review_path(@listing), class: "btn btn-primary" %>
 <% end %>
+
+
 <%= link_to 'Back', listing_path, class: "btn btn-link" %>
+
+<script>
+  $('.star-rating').raty({
+    path: '../assets',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>

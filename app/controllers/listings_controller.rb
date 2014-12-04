@@ -4,6 +4,7 @@ class ListingsController < ApplicationController
   before_filter :check_user, only: [:edit, :update, :destroy]
 
 
+
   def seller
     @listings = Listing.where(user: current_user).order("created_at DESC")
   end
@@ -16,6 +17,12 @@ class ListingsController < ApplicationController
   # GET /listings/1
   # GET /listings/1.json
   def show
+    @reviews = Review.where(listing_id: @listing.id).order("created_at DESC")
+    if @reviews.blank?
+      @avg_rating = 0
+    else
+      @avg_rating = @reviews.average(:rating).round(2)
+    end
   end
 
   # GET /listings/new
